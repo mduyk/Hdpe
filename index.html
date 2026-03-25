@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Hiệu ứng cóooo</title>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    background: black;
+}
+
+.cooo {
+    position: fixed;
+    color: #00ffcc;
+    font-weight: bold;
+    font-family: Arial;
+    pointer-events: none;
+    white-space: nowrap;
+}
+</style>
+</head>
+
+<body>
+
+<script>
+function createCooo() {
+    let el = document.createElement("div");
+    el.className = "cooo";
+
+    // random số chữ "o"
+    let length = Math.floor(Math.random() * 10) + 3;
+    el.innerText = "có" + "o".repeat(length);
+
+    // random vị trí
+    let side = Math.floor(Math.random() * 4);
+    let x, y;
+
+    if (side === 0) {
+        x = -100;
+        y = Math.random() * window.innerHeight;
+    } else if (side === 1) {
+        x = window.innerWidth + 100;
+        y = Math.random() * window.innerHeight;
+    } else if (side === 2) {
+        x = Math.random() * window.innerWidth;
+        y = -50;
+    } else {
+        x = Math.random() * window.innerWidth;
+        y = window.innerHeight + 50;
+    }
+
+    el.style.left = x + "px";
+    el.style.top = y + "px";
+
+    document.body.appendChild(el);
+
+    // random hướng bay
+    let dx = (Math.random() - 0.5) * 6;
+    let dy = (Math.random() - 0.5) * 6;
+
+    let move = setInterval(() => {
+        x += dx;
+        y += dy;
+        el.style.left = x + "px";
+        el.style.top = y + "px";
+
+        if (x < -200 || x > window.innerWidth + 200 || y < -200 || y > window.innerHeight + 200) {
+            clearInterval(move);
+            el.remove();
+        }
+    }, 30);
+}
+
+// tạo liên tục
+setInterval(createCooo, 300);
+</script>
+
+</body>
+</html>
